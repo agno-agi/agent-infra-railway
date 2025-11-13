@@ -48,7 +48,7 @@ prd_agentos = RailwayAgentOS(
         "ENABLE_AGENTIC_MEMORY": "true",
         "MEMORY_PROVIDER": "postgres",
 
-        "ANTHROPIC_API_KEY": "jnhs",
+        "ANTHROPIC_API_KEY": ANTHROPIC_API_KEY,
 
         # Metrics and monitoring
         "ENABLE_METRICS": "true",
