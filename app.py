@@ -1,11 +1,13 @@
 """AgentOS application entry point for Railway deployment."""
-
+import os
 from agno.os import AgentOS
 from infra.agents import assistant_agent
+from agno.db.postgres import PostgresDb
 
 # Create AgentOS instance with our assistant agent
 agent_os = AgentOS(
     agents=[assistant_agent],
+    db=PostgresDb(db_url=os.getenv("DATABASE_URL")),
     # Add teams and workflows here if needed
 )
 

@@ -44,6 +44,9 @@ prd_agentos = RailwayAgentOS(
         "ENVIRONMENT": "production",
         "LOG_LEVEL": "info",
 
+        # Construct DATABASE_URL from Railway's Postgres variables
+        "DATABASE_URL": f"postgresql://${{{{prd-test-db.POSTGRES_USER}}}}:${{{{prd-test-db.POSTGRES_PASSWORD}}}}@${{{{prd-test-db.RAILWAY_PRIVATE_DOMAIN}}}}//${{{{prd-test-db.POSTGRES_DB}}}}",
+
         # Agent features
         "ENABLE_AGENTIC_MEMORY": "true",
         "MEMORY_PROVIDER": "postgres",
