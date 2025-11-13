@@ -7,7 +7,7 @@ from agno.models.anthropic import Claude
 assistant_agent = Agent(
     name="Assistant",
     id="assistant-agent",
-    model=Claude(id="claude-3-5-sonnet-20241022"),
+    model=Claude(id="claude-sonnet-4-5-20250929"),
     description="A helpful AI assistant deployed on Railway",
     instructions=[
         "You are a helpful AI assistant.",

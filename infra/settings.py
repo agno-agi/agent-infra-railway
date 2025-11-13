@@ -20,7 +20,7 @@ infra_settings = InfraSettings(
 
     # Docker image configuration
     image_repo="uzairali10",
-    image_name="test-railway-agent",
+    image_name="my-railway-agent",
 
     # Railway will use environment variables:
     # - RAILWAY_API_TOKEN
