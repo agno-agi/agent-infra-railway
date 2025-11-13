@@ -1,0 +1,13 @@
+# Agno framework
+agno
+
+# Model providers
+anthropic
+
+# Database support
+psycopg[binary]
+sqlalchemy
+
+# Web server
+uvicorn[standard]
+fastapi

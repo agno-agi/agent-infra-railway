@@ -1,0 +1,63 @@
+
+Starting AgentOS codebase infrastructure: test-railway-agent
+WARNING Error in                                                                
+        /Users/uzair/Work/agno/test-railway-agent/infra/agents/assistant_agent.p
+        y                                                                       
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /Users/uzair/Work/agno/libs/agno_infra/agno/cli/infra_cli.py:264 in up       │
+│                                                                              │
+│   261 │   if target_infra is None and infra_to_start and infra_to_start.infr │
+│   262 │   │   target_infra = infra_to_start.infra_settings.default_infra if  │
+│   263 │                                                                      │
+│ ❱ 264 │   start_infra(                                                       │
+│   265 │   │   infra_config=infra_to_start,  # type: ignore                   │
+│   266 │   │   target_env=target_env,                                         │
+│   267 │   │   target_infra=target_infra,                                     │
+│                                                                              │
+│ /Users/uzair/Work/agno/libs/agno_infra/agno/infra/operator.py:241 in         │
+│ start_infra                                                                  │
+│                                                                              │
+│   238 │   infra_config.set_local_env()                                       │
+│   239 │                                                                      │
+│   240 │   # Get resource groups to deploy                                    │
+│ ❱ 241 │   resource_groups_to_create: List[InfraResources] = infra_config.get │
+│   242 │   │   env=target_env,                                                │
+│   243 │   │   infra=target_infra,                                            │
+│   244 │   │   order="create",                                                │
+│                                                                              │
+│ /Users/uzair/Work/agno/libs/agno_infra/agno/infra/config.py:150 in           │
+│ get_resources                                                                │
+│                                                                              │
+│   147 │   │   │   │   │   continue                                           │
+│   148 │   │   │   │   logger.debug(f"Reading file: {resource_file}")         │
+│   149 │   │   │   │   try:                                                   │
+│ ❱ 150 │   │   │   │   │   python_objects = get_python_objects_from_module(re │
+│   151 │   │   │   │   │   # logger.debug(f"python_objects: {python_objects}" │
+│   152 │   │   │   │   │   for obj_name, obj in python_objects.items():       │
+│   153 │   │   │   │   │   │   if isinstance(obj, InfraSettings):             │
+│                                                                              │
+│ /Users/uzair/Work/agno/libs/agno_infra/agno/utilities/py_io.py:16 in         │
+│ get_python_objects_from_module                                               │
+│                                                                              │
+│   13 │   # Using the ModuleSpec create a module                              │
+│   14 │   if module_spec:                                                     │
+│   15 │   │   module = importlib.util.module_from_spec(module_spec)           │
+│ ❱ 16 │   │   module_spec.loader.exec_module(module)  # type: ignore          │
+│   17 │   │   return module.__dict__                                          │
+│   18 │   else:                                                               │
+│   19 │   │   return {}                                                       │
+│ in exec_module:999                                                           │
+│ in _call_with_frames_removed:488                                             │
+│                                                                              │
+│ /Users/uzair/Work/agno/test-railway-agent/infra/agents/assistant_agent.py:6  │
+│ in <module>                                                                  │
+│                                                                              │
+│    3 import os                                                               │
+│    4 from agno.agent import Agent                                            │
+│    5 from agno.models.anthropic import Claude                                │
+│ ❱  6 from agno.storage.postgres import PostgresStorage                       │
+│    7                                                                         │
+│    8 # Get database URL from environment                                     │
+│    9 database_url = os.getenv("DATABASE_URL")                                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+ModuleNotFoundError: No module named 'agno.storage'
