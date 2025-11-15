@@ -6,11 +6,12 @@ from agno.models.anthropic import Claude
 
 def get_db_url() -> str:
     db_driver = getenv("DB_DRIVER", "postgresql+psycopg")
-    db_user = getenv("DB_USER") or getenv("PGUSER")
-    db_pass = getenv("DB_PASS") or getenv("PGPASSWORD")
-    db_host = getenv("DB_HOST") or getenv("PGHOST")
-    db_port = getenv("DB_PORT") or getenv("PGPORT")
-    db_database = getenv("DB_DATABASE") or getenv("PGDATABASE")
+    db_name = "prd-test-db"
+    db_user = f"${{{{{db_name}.POSTGRES_USER}}}}"
+    db_pass = f"${{{{{db_name}.POSTGRES_PASSWORD}}}}"
+    db_host = f"${{{{{db_name}.RAILWAY_PRIVATE_DOMAIN}}}}"
+    db_port = "5432"
+    db_database = f"${{{{{db_name}.POSTGRES_DB}}}}"
     return "{}://{}{}@{}:{}/{}".format(
         db_driver,
         db_user,
