@@ -81,10 +81,10 @@ The `/agents` folder contains pre-built agents, teams and workflows that you can
 
 To deploy the application on Railway, please follow the steps below:
 
-1. Install the Railway CLI:
+1. Install the Railway CLI (More details [here](https://docs.railway.com/guides/cli)):
 
 ```sh
-curl -fsSL https://railway.com/install.sh | sh
+brew install railway
 ```
 
 2. Login to your Railway account:
@@ -101,13 +101,13 @@ Note: Remember to set the `OPENAI_API_KEY` in the scripts/railway_deploy.sh file
 ./scripts/railway_deploy.sh
 ```
 
-4. Monitor the deployment:
+4. Monitor the deployment (Optional):
 
 ```sh
 railway logs --service agent_os
 ```
 
-5. Access the application:
+5. Access the application via the Railway UI:
 
 ```sh
 railway open
