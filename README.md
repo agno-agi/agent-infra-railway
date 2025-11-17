@@ -30,15 +30,13 @@ We use GPT 5 as the default model, please export the `OPENAI_API_KEY` environmen
 export OPENAI_API_KEY="YOUR_API_KEY_HERE"
 ```
 
-> **Note**: You can use any model provider, just update the agents in the `/agents` folder and add the required library in the `pyproject.toml` and `requirements.txt` file.
+To deploy the application on Railway, please also set the `OPENAI_API_KEY` in the scripts/railway_deploy.sh file.
+
+> **Note**: You can use any model provider, just update the respective agents, teams and workflows and add the required library in the `pyproject.toml` and `requirements.txt` file.
 
 ### Start the application
 
-```sh
-ag infra up
-```
-
-Or run the application using docker compose (Remove the `--build` flag if you already have the image built):
+Run the application using docker compose (Remove the `--build` flag if you already have the image built):
 
 ```sh
 docker compose up -d --build
@@ -73,25 +71,64 @@ Or:
 docker compose down
 ```
 
-## Prebuilt Agents
+## Prebuilt Agents, Teams and Workflows
 
-The `/agents` folder contains pre-built agents that you can use as a starting point.
+The `/agents` folder contains pre-built agents, teams and workflows that you can use as a starting point.
 
-- Web Search Agent: A simple agent that can search the web.
-- Agno Assist: An Agent that can help answer questions about Agno.
-- Finance Agent: An agent that uses the Financial Datasets API to get stock prices and financial data.
+#TODO: Add documentation for agents, teams and workflows
 
-## Development Setup
+## Railway Deployment
 
-To setup your local virtual environment:
+To deploy the application on Railway, please follow the steps below:
 
-### Install `uv`
-
-We use `uv` for python environment and package management. Install it by following the the [`uv` documentation](https://docs.astral.sh/uv/#getting-started) or use the command below for unix-like systems:
+1. Install the Railway CLI:
 
 ```sh
-curl -LsSf https://astral.sh/uv/install.sh | sh
+curl -fsSL https://railway.com/install.sh | sh
 ```
+
+2. Login to your Railway account:
+
+```sh
+railway login
+```
+
+Note: Remember to set the `OPENAI_API_KEY` in the scripts/railway_deploy.sh file before running the script.
+
+3. Run the deployment script:
+
+```sh
+./scripts/railway_deploy.sh
+```
+
+4. Monitor the deployment:
+
+```sh
+railway logs --service agent_os
+```
+
+5. Access the application:
+
+```sh
+railway open
+```
+
+6. Create Domain on Railway:
+
+From the UI that will be opened in your browser, click on `agent_os`. Browse to the settings and click on Generate Domain. After you have a domain, you can use it to access the application on os.agno.com.
+
+7. On Agno AgentOS UI, connect your OS with the domain you just created. A coupon code will be provided to you to during the workshop to add a live OS instance.
+
+Congratulations! You have successfully deployed Agent OS on Railway. Your OS is now live and ready to use. You can now start using your Agents, Teams and Workflows as well as take a look at your Sessions, Memories, Knowledge and Metrics.
+
+### What the railway_deploy.sh script does:
+
+The script does the following:
+
+1. Initializes a new project on Railway
+2. Deploys PgVector database on Railway
+3. Creates the application service with environment variables already set (DB_DRIVER, DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_DATABASE, OPENAI_API_KEY)
+4. Deploys the application
 
 ### Create Virtual Environment & Install Dependencies
 
@@ -171,65 +208,3 @@ Need help, have a question, or want to connect with the community?
 - 💬 **Chat with us on [Discord](https://agno.link/discord)** for live discussions.
 - ❓ **Ask a question on [Discourse](https://agno.link/community)** for community support.
 - 🐛 **[Report an Issue](https://github.com/agno-agi/agent-api/issues)** on GitHub if you find a bug or have a feature request.
-
-## Running in Production
-
-This repository includes a `Dockerfile` for building a production-ready container image of the application.
-
-The general process to run in production is:
-
-1. Update the `scripts/build_image.sh` file and set your IMAGE_NAME and IMAGE_TAG variables.
-2. Build and push the image to your container registry:
-
-```sh
-./scripts/build_image.sh
-```
-
-3. Run in your cloud provider of choice.
-
-### Detailed Steps
-
-1. **Configure for Production**
-
-- Ensure your production environment variables (e.g., `OPENAI_API_KEY`, database connection strings) are securely managed. Most cloud providers offer a way to set these as environment variables for your deployed service.
-- Review the agent configurations in the `/agents` directory and ensure they are set up for your production needs (e.g., correct model versions, any production-specific settings).
-
-2. **Build Your Production Docker Image**
-
-- Update the `scripts/build_image.sh` script to set your desired `IMAGE_NAME` and `IMAGE_TAG` (e.g., `your-repo/agent-api:v1.0.0`).
-- Run the script to build and push the image:
-
-  ```sh
-  ./scripts/build_image.sh
-  ```
-
-3. **Deploy to a Cloud Service**
-   With your image in a registry, you can deploy it to various cloud services that support containerized applications. Some common options include:
-
-- **Serverless Container Platforms**:
-
-  - **Google Cloud Run**: A fully managed platform that automatically scales your stateless containers. Ideal for HTTP-driven applications.
-  - **AWS App Runner**: Similar to Cloud Run, AWS App Runner makes it easy to deploy containerized web applications and APIs at scale.
-  - **Azure Container Apps**: Build and deploy modern apps and microservices using serverless containers.
-
-- **Container Orchestration Services**:
-
-  - **Amazon Elastic Container Service (ECS)**: A highly scalable, high-performance container orchestration service that supports Docker containers. Often used with AWS Fargate for serverless compute or EC2 instances for more control.
-  - **Google Kubernetes Engine (GKE)**: A managed Kubernetes service for deploying, managing, and scaling containerized applications using Google infrastructure.
-  - **Azure Kubernetes Service (AKS)**: A managed Kubernetes service for deploying and managing containerized applications in Azure.
-
-- **Platform as a Service (PaaS) with Docker Support**
-
-  - **Railway.app**: Offers a simple way to deploy applications from a Dockerfile. It handles infrastructure, scaling, and networking.
-  - **Render**: Another platform that simplifies deploying Docker containers, databases, and static sites.
-  - **Heroku**: While traditionally known for buildpacks, Heroku also supports deploying Docker containers.
-
-- **Specialized Platforms**:
-  - **Modal**: A platform designed for running Python code (including web servers like FastAPI) in the cloud, often with a focus on batch jobs, scheduled functions, and model inference, but can also serve web endpoints.
-
-The specific deployment steps will vary depending on the chosen provider. Generally, you'll point the service to your container image in the registry and configure aspects like port mapping (the application runs on port 8000 by default inside the container), environment variables, scaling parameters, and any necessary database connections.
-
-4. **Database Configuration**
-
-- The default `docker-compose.yml` sets up a PostgreSQL database for local development. In production, you will typically use a managed database service provided by your cloud provider (e.g., AWS RDS, Google Cloud SQL, Azure Database for PostgreSQL) for better reliability, scalability, and manageability.
-- Ensure your deployed application is configured with the correct database connection URL for your production database instance. This is usually set via an environment variables.

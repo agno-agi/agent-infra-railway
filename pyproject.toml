@@ -1,5 +1,5 @@
 [project]
-name = "agent-infra-docker"
+name = "agent-infra-railway"
 version = "1.0.0"
 requires-python = ">=3.11,<4"
 readme = "README.md"
