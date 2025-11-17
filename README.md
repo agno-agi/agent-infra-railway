@@ -30,7 +30,7 @@ We use GPT 5 as the default model, please export the `OPENAI_API_KEY` environmen
 export OPENAI_API_KEY="YOUR_API_KEY_HERE"
 ```
 
-To deploy the application on Railway, please also set the `OPENAI_API_KEY` in the scripts/railway_deploy.sh file.
+Alternatively, you could set the `OPENAI_API_KEY` in the scripts/railway_deploy.sh file before running the script.
 
 > **Note**: You can use any model provider, just update the respective agents, teams and workflows and add the required library in the `pyproject.toml` and `requirements.txt` file.
 
@@ -93,7 +93,7 @@ brew install railway
 railway login
 ```
 
-Note: Remember to set the `OPENAI_API_KEY` in the scripts/railway_deploy.sh file before running the script.
+Note: Remember to either export the `OPENAI_API_KEY` environment variable or set it in the scripts/railway_deploy.sh file before running the script.
 
 3. Run the deployment script:
 

@@ -29,11 +29,16 @@ railway add --service agent_os \
   --variables 'DB_HOST=${{pgvector.PGHOST}}' \
   --variables 'DB_PORT=${{pgvector.PGPORT}}' \
   --variables 'DB_DATABASE=${{pgvector.PGDATABASE}}' \
-  --variables "OPENAI_API_KEY=<YOUR_OPENAI_API_KEY>"
+  --variables "OPENAI_API_KEY=${OPENAI_API_KEY}"
 
 # Deploy the application
 echo "🚀 Deploying application..."
 railway up --service agent_os -d
+
+echo "🔗 Creating domain..."
+railway domain -p 8000
+
+echo "Note: It may take upto 5 minutes for the domain to reach ready state while the application is deploying."
 
 echo "✅ Deployment complete!"
 echo "💡 Tip: Run 'railway logs --service agent_os' to view your application logs"
