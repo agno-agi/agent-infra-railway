@@ -10,7 +10,6 @@
     "startCommand": "uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload",
     "sleepApplication": false,
     "useLegacyStacker": false,
-    "plugins": [{ "name": "postgres" }],
     "multiRegionConfig": {
       "europe-west4-drams3a": {
         "numReplicas": 1
