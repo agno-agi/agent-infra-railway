@@ -1,6 +1,6 @@
 # Agent OS Railway
 
-Welcome to Agent OS Docker: a robust, production-ready application for serving Agentic Applications as an API. It includes:
+Welcome to Agent OS Railway: a robust, production-ready application for serving Agentic Applications as an API. It includes:
 
 - An **AgentOS instance**: An API-based interface for production-ready Agentic Applications.
 - A **PostgreSQL database** for storing Agent sessions, knowledge, and memories.
