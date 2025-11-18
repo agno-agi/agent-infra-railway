@@ -36,7 +36,7 @@ echo "🚀 Deploying application..."
 railway up --service agent_os -d
 
 echo "🔗 Creating domain..."
-railway domain -p 8000
+railway domain --service agent_os
 
 echo "Note: It may take upto 5 minutes for the domain to reach ready state while the application is deploying."
 

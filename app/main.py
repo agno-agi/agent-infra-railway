@@ -16,7 +16,7 @@ agno_assist = get_agno_assist(model_id="gpt-5")
 # Create the AgentOS
 agent_os = AgentOS(
     os_id="agentos-demo",
-    agents=[web_agent, agno_assist],
+    agents=[agno_assist],
     # Configuration for the AgentOS
     config=os_config_path,
 )

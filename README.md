@@ -4,7 +4,7 @@ Welcome to Agent OS Docker: a robust, production-ready application for serving A
 
 - An **AgentOS instance**: An API-based interface for production-ready Agentic Applications.
 - A **PostgreSQL database** for storing Agent sessions, knowledge, and memories.
-- A set of **pre-built Agents** to use as a starting point.
+- A set of **pre-built Agents, Teams and Workflows** to use as a starting point.
 
 For more information, checkout [Agno](https://agno.link/gh) and give it a ⭐️
 
@@ -30,8 +30,6 @@ We use GPT 5 as the default model, please export the `OPENAI_API_KEY` environmen
 export OPENAI_API_KEY="YOUR_API_KEY_HERE"
 ```
 
-Alternatively, you could set the `OPENAI_API_KEY` in the scripts/railway_deploy.sh file before running the script.
-
 > **Note**: You can use any model provider, just update the respective agents, teams and workflows and add the required library in the `pyproject.toml` and `requirements.txt` file.
 
 ### Start the application
@@ -55,27 +53,15 @@ Once started, you can:
 
 - Open the [Agno AgentOS UI](https://os.agno.com).
 - Connect your OS with `http://localhost:8000` as the endpoint. You can name it `AgentOS` (or any name you prefer).
-- Explore all the features of AgentOS or go straight to the Chat page to interact with your Agents.
+- Explore all the features of AgentOS or go straight to the Chat page to interact with your Agents, Teams and Workflows.
 
 ### Stop the application
 
 When you're done, stop the application using:
 
 ```sh
-ag infra down
-```
-
-Or:
-
-```sh
 docker compose down
 ```
-
-## Prebuilt Agents, Teams and Workflows
-
-The `/agents` folder contains pre-built agents, teams and workflows that you can use as a starting point.
-
-#TODO: Add documentation for agents, teams and workflows
 
 ## Railway Deployment
 
@@ -93,12 +79,12 @@ brew install railway
 railway login
 ```
 
-Note: Remember to either export the `OPENAI_API_KEY` environment variable or set it in the scripts/railway_deploy.sh file before running the script.
+Note: Remember to either export the `OPENAI_API_KEY` environment variable.
 
 3. Run the deployment script:
 
 ```sh
-./scripts/railway_deploy.sh
+./scripts/railway_up.sh
 ```
 
 4. Monitor the deployment (Optional):
@@ -113,13 +99,21 @@ railway logs --service agent_os
 railway open
 ```
 
-6. Create Domain on Railway:
-
-From the UI that will be opened in your browser, click on `agent_os`. Browse to the settings and click on Generate Domain. After you have a domain, you can use it to access the application on os.agno.com.
+6. In the CLI, you will see the domain of your application. Click on it to access your AgentOS FastAPI server. You can navigate to <url>/docs to access the API documentation.
 
 7. On Agno AgentOS UI, connect your OS with the domain you just created. A coupon code will be provided to you to during the workshop to add a live OS instance.
 
 Congratulations! You have successfully deployed Agent OS on Railway. Your OS is now live and ready to use. You can now start using your Agents, Teams and Workflows as well as take a look at your Sessions, Memories, Knowledge and Metrics.
+
+### Updating your Railway Deployment
+
+To update your Railway deployment, you can run the following command:
+
+```sh
+./scripts/railway_up.sh
+```
+
+This will trigger a new deployment of your application by creating a new docker image and deploying it to Railway.
 
 ### What the railway_deploy.sh script does:
 
@@ -129,6 +123,12 @@ The script does the following:
 2. Deploys PgVector database on Railway
 3. Creates the application service with environment variables already set (DB_DRIVER, DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_DATABASE, OPENAI_API_KEY)
 4. Deploys the application
+
+## Prebuilt Agents, Teams and Workflows
+
+The `/agents` folder contains pre-built agents, teams and workflows that you can use as a starting point.
+
+#TODO: Add documentation for agents, teams and workflows
 
 ### Create Virtual Environment & Install Dependencies
 
