@@ -4,11 +4,13 @@ docs
 .git
 
 # Cache
+.cache
 .mypy_cache
 .ruff_cache
 .pytest_cache
 *__pycache__*
 *.egg-info
+agent_infra_railway.egg-info
 *.pyc
 
 # Machine specific
