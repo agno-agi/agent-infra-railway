@@ -16,6 +16,7 @@ dependencies = [
   "psycopg[binary]",
   "requests",
   "sqlalchemy",
+  "wikipedia",
 ]
 
 [project.optional-dependencies]

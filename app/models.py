@@ -1,0 +1,2 @@
+OPENAI_MODEL_ID = "gpt-5"
+
