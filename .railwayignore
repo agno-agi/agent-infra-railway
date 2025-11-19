@@ -1,0 +1,58 @@
+# Railway Ignore File - Prevents uploading unnecessary files to Railway
+
+# Virtual environments (231MB)
+.venv/
+venv/
+env/
+*.venv/
+aienv*/
+
+# IDE settings
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+
+# Git directory
+.git/
+
+# Cache directories
+.cache/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Build artifacts
+*.egg-info/
+build/
+dist/
+*.egg
+
+# Test coverage
+htmlcov/
+.coverage
+.hypothesis/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.envrc
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+
+# Development files
+*.ipynb_checkpoints/
+.python-version
