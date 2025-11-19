@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Test runner script for agent-os-docker
+# Test runner script for agent-os-railway
 set -e
 
 # Colors for output

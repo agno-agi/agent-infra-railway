@@ -1,6 +1,6 @@
 # Agent OS Railway
 
-Welcome to Agent OS Railway: a robust, production-ready application for serving Agentic Applications as an API. It includes:
+Welcome to Agent OS Railway: a robust, production-ready application for serving Agentic Applications as an API on Railway. It includes:
 
 - An **AgentOS instance**: An API-based interface for production-ready Agentic Applications.
 - A **PostgreSQL database** for storing Agent sessions, knowledge, and memories.
@@ -32,7 +32,13 @@ export OPENAI_API_KEY="YOUR_API_KEY_HERE"
 
 > **Note**: You can use any model provider, just update the respective agents, teams and workflows and add the required library in the `pyproject.toml` and `requirements.txt` file.
 
-### Start the application
+## Running the application
+
+The application can be run on two environments:
+
+Locally using Docker Compose or on Railway using the Railway CLI.
+
+### Locally using Docker Compose
 
 Run the application using docker compose (Remove the `--build` flag if you already have the image built):
 
@@ -63,7 +69,7 @@ When you're done, stop the application using:
 docker compose down
 ```
 
-## Railway Deployment
+### Railway Deployment
 
 To deploy the application on Railway, please follow the steps below:
 
@@ -101,19 +107,35 @@ railway open
 
 6. In the CLI, you will see the domain of your application. Click on it to access your AgentOS FastAPI server. You can navigate to <url>/docs to access the API documentation.
 
-7. On Agno AgentOS UI, connect your OS with the domain you just created. A coupon code will be provided to you to during the workshop to add a live OS instance.
+7. On Agno AgentOS UI, connect your OS with the domain you just created.
+
+- Open the [Agno AgentOS UI](https://os.agno.com).
+- Connect your OS with `<railway-domain>` as the endpoint.
 
 Congratulations! You have successfully deployed Agent OS on Railway. Your OS is now live and ready to use. You can now start using your Agents, Teams and Workflows as well as take a look at your Sessions, Memories, Knowledge and Metrics.
 
 ### Updating your Railway Deployment
 
-To update your Railway deployment, you can run the following command:
+To update your Railway deployment, you can run the following command after making changes to the application:
 
 ```sh
 ./scripts/railway_up.sh
 ```
 
 This will trigger a new deployment of your application by creating a new docker image and deploying it to Railway.
+
+### Stopping your Railway Deployment
+
+To stop your Railway deployment, you can run the following command:
+
+```sh
+railway down --service agent_os
+railway down --service pgvector
+```
+
+This will stop your services on Railway.
+
+Note: In order to start services again, in the same project on railway, you can run the `./scripts/railway_up.sh` script again but make sure to remove the railway init command as that will create a new project on Railway.
 
 ### What the railway_deploy.sh script does:
 
@@ -123,6 +145,7 @@ The script does the following:
 2. Deploys PgVector database on Railway
 3. Creates the application service with environment variables already set (DB_DRIVER, DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_DATABASE, OPENAI_API_KEY)
 4. Deploys the application
+5. Creates a domain for your application
 
 ## Prebuilt Agents, Teams and Workflows
 

@@ -1,5 +1,5 @@
 """
-Integration tests for agent endpoints.
+Integration tests for agent-os-railway endpoints.
 """
 
 import urllib.parse

@@ -1,5 +1,5 @@
 """
-Health check tests for the agent-os-docker API.
+Health check tests for the agent-os-railway API.
 """
 
 from . import get_api_url
