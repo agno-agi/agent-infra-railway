@@ -16,6 +16,7 @@ dependencies = [
   "psycopg[binary]",
   "requests",
   "sqlalchemy",
+  "pytest",
 ]
 
 [project.optional-dependencies]

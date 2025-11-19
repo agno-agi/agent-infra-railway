@@ -26,6 +26,7 @@ httptools==0.6.4
 httpx==0.28.1
 hyperframe==6.1.0
 idna==3.10
+iniconfig==2.3.0
 jinja2==3.1.6
 jiter==0.11.0
 lxml==6.0.2
@@ -36,6 +37,7 @@ numpy==2.3.3
 openai==1.109.1
 packaging==25.0
 pgvector==0.4.1
+pluggy==1.6.0
 primp==0.15.0
 psycopg==3.2.10
 psycopg-binary==3.2.10
@@ -43,6 +45,7 @@ pydantic==2.11.9
 pydantic-core==2.33.2
 pydantic-settings==2.11.0
 pygments==2.19.2
+pytest==9.0.1
 python-dotenv==1.1.1
 python-multipart==0.0.20
 pyyaml==6.0.3
