@@ -105,12 +105,12 @@ railway logs --service agent_os
 railway open
 ```
 
-6. In the CLI, you will see the domain of your application. Click on it to access your AgentOS FastAPI server. You can navigate to <url>/docs to access the API documentation.
+6. In the CLI, you will see the domain of your application. Click on it to access your AgentOS FastAPI server. You can navigate to `<railway-domain>/docs` to access the API documentation.
 
 7. On Agno AgentOS UI, connect your OS with the domain you just created.
 
 - Open the [Agno AgentOS UI](https://os.agno.com).
-- Connect your OS with `<railway-domain>` as the endpoint.
+- Connect your OS with `<railway-domain>/docs` as the endpoint.
 
 Congratulations! You have successfully deployed Agent OS on Railway. Your OS is now live and ready to use. You can now start using your Agents, Teams and Workflows as well as take a look at your Sessions, Memories, Knowledge and Metrics.
 
@@ -137,7 +137,7 @@ This will stop your services on Railway.
 
 Note: In order to start services again, in the same project on railway, you can run the `./scripts/railway_up.sh` script again but make sure to remove the railway init command as that will create a new project on Railway.
 
-### What the railway_deploy.sh script does:
+### What the railway_up.sh script does:
 
 The script does the following:
 
@@ -230,4 +230,4 @@ Need help, have a question, or want to connect with the community?
 - 📚 **[Read the Agno Docs](https://docs.agno.com)** for more in-depth information.
 - 💬 **Chat with us on [Discord](https://agno.link/discord)** for live discussions.
 - ❓ **Ask a question on [Discourse](https://agno.link/community)** for community support.
-- 🐛 **[Report an Issue](https://github.com/agno-agi/agent-api/issues)** on GitHub if you find a bug or have a feature request.
+- 🐛 **[Report an Issue](https://github.com/agno-agi/agent-infra-railway/issues)** on GitHub if you find a bug or have a feature request.
