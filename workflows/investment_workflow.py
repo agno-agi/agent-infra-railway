@@ -12,7 +12,7 @@ from agno.workflow.workflow import Workflow
 from pydantic import BaseModel
 
 from app.models import OPENAI_MODEL_ID
-from db.session import get_session_db
+from db.session import get_psql_db
 
 
 # ************* Input Schema *************
@@ -63,7 +63,7 @@ market_researcher = Agent(
 
         Always capture and save source URLs for credibility and further research.
     """),
-    db=get_session_db(),
+    db=get_psql_db(),
     markdown=True,
     debug_mode=True,
 )
@@ -106,7 +106,7 @@ financial_analyst = Agent(
 
         Focus on data-driven analysis with clear supporting calculations and credible sources.
     """),
-    db=get_session_db(),
+    db=get_psql_db(),
     markdown=True,
     debug_mode=True,
 )
@@ -149,7 +149,7 @@ portfolio_strategist = Agent(
 
         Create comprehensive strategies backed by quantitative analysis and credible market research.
     """),
-    db=get_session_db(),
+    db=get_psql_db(),
     markdown=True,
     debug_mode=True,
 )
@@ -493,7 +493,7 @@ basic_portfolio_step = Step(
 investment_workflow = Workflow(
     name="Investment Analyst Pro",
     description="Professional investment analysis engine that evaluates market opportunities, conducts financial due diligence with adaptive research steps, and delivers strategic portfolio recommendations",
-    db=get_session_db(),
+    db=get_psql_db(),
     steps=[
         parse_request_step,
         market_research_loop,

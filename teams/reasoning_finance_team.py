@@ -7,7 +7,7 @@ from agno.tools.duckduckgo import DuckDuckGoTools
 from agno.tools.reasoning import ReasoningTools
 
 from app.models import OPENAI_MODEL_ID
-from db.session import get_session_db
+from db.session import get_psql_db
 
 # ************* Team Members Setup *************
 web_agent = Agent(
@@ -22,7 +22,7 @@ web_agent = Agent(
         "Provide context and background information",
     ],
     tools=[DuckDuckGoTools()],
-    db=get_session_db(),
+    db=get_psql_db(),
     add_datetime_to_context=True,
 )
 
@@ -41,7 +41,7 @@ research_agent = Agent(
         "Provide well-reasoned analysis and actionable insights based on comprehensive web research.",
     ],
     tools=[DuckDuckGoTools()],
-    db=get_session_db(),
+    db=get_psql_db(),
     add_datetime_to_context=True,
 )
 
@@ -70,7 +70,7 @@ reasoning_research_team = Team(
         research_agent,
     ],
     # -*- Storage -*-
-    db=get_session_db(),
+    db=get_psql_db(),
     add_history_to_context=True,
     num_history_runs=3,
     # Other settings

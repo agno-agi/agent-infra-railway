@@ -14,8 +14,8 @@ db_engine: Engine = create_engine(db_url, pool_pre_ping=True)
 SessionLocal: sessionmaker[Session] = sessionmaker(autocommit=False, autoflush=False, bind=db_engine)
 
 
-def get_session_db(session_table: str = "agno_sessions") -> PostgresDb:
-    """Create a PostgresDb instance for session storage with a specific table name."""
+def get_psql_db(session_table: str = "agno_sessions") -> PostgresDb:
+    """Create a PostgresDb instance for Agno storage (sessions, memory, metrics, etc.)."""
     return PostgresDb(db_url=db_url, id="agent-os", session_table=session_table)
 
 

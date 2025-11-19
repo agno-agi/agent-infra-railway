@@ -5,7 +5,7 @@ from agno.models.openai import OpenAIChat
 from agno.team.team import Team
 
 from app.models import OPENAI_MODEL_ID
-from db.session import get_session_db
+from db.session import get_psql_db
 
 # ************* Team Members *************
 japanese_specialist = Agent(
@@ -22,7 +22,7 @@ japanese_specialist = Agent(
         "Always respond in Japanese while providing cultural insights.",
         "Handle document translation with proper business formatting and honorific usage.",
     ],
-    db=get_session_db(),
+    db=get_psql_db(),
     markdown=True,
 )
 
@@ -39,7 +39,7 @@ spanish_specialist = Agent(
         "Always respond in Spanish while providing cultural and regional insights.",
         "Handle professional document translation with appropriate regional terminology.",
     ],
-    db=get_session_db(),
+    db=get_psql_db(),
     markdown=True,
 )
 
@@ -56,7 +56,7 @@ french_specialist = Agent(
         "Always respond in French while providing cultural insights.",
         "Handle business document translation with proper French professional standards.",
     ],
-    db=get_session_db(),
+    db=get_psql_db(),
     markdown=True,
 )
 
@@ -73,7 +73,7 @@ hindi_specialist = Agent(
         "Always respond in Hindi while providing cultural and business insights.",
         "Handle document translation with proper Indian business communication standards.",
     ],
-    db=get_session_db(),
+    db=get_psql_db(),
     markdown=True,
 )
 
@@ -90,7 +90,7 @@ german_specialist = Agent(
         "Always respond in German while providing cultural and business insights.",
         "Handle professional document translation with proper Germanic business standards.",
     ],
-    db=get_session_db(),
+    db=get_psql_db(),
     markdown=True,
 )
 
@@ -146,7 +146,7 @@ multilingual_team = Team(
     respond_directly=True,
     show_members_responses=True,
     # -*- Storage -*-
-    db=get_session_db(),
+    db=get_psql_db(),
     add_history_to_context=True,
     num_history_runs=3,
     # Other settings

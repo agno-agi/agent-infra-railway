@@ -13,7 +13,7 @@ from agno.workflow.workflow import Workflow
 from pydantic import BaseModel, Field
 
 from app.models import OPENAI_MODEL_ID
-from db.session import get_session_db
+from db.session import get_psql_db
 
 
 # ************* Input Schema *************
@@ -78,7 +78,7 @@ research_coordinator = Agent(
 
         Always provide comprehensive, well-sourced research with clear references.
     """),
-    db=get_session_db(),
+    db=get_psql_db(),
     markdown=True,
     debug_mode=True,
 )
@@ -123,7 +123,7 @@ content_analyst = Agent(
 
         Focus on generating actionable insights and clear, well-supported conclusions.
     """),
-    db=get_session_db(),
+    db=get_psql_db(),
     markdown=True,
     debug_mode=True,
 )
@@ -171,7 +171,7 @@ report_writer = Agent(
 
         Create reports that are informative, professional, and actionable for decision-makers.
     """),
-    db=get_session_db(),
+    db=get_psql_db(),
     markdown=True,
     debug_mode=True,
 )
@@ -459,7 +459,7 @@ basic_report_step = Step(
 research_workflow = Workflow(
     name="Advanced Research Analyst",
     description="AI-powered research analyst that conducts multi-source investigations, performs quality-validated analysis, and generates professional reports with insights and citations",
-    db=get_session_db(),
+    db=get_psql_db(),
     steps=[
         research_loop,
         analysis_condition,
