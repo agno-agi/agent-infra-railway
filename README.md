@@ -110,7 +110,7 @@ railway open
 7. On Agno AgentOS UI, connect your OS with the domain you just created.
 
 - Open the [Agno AgentOS UI](https://os.agno.com).
-- Connect your OS with `<railway-domain>/docs` as the endpoint.
+- Connect your OS with `<railway-domain>` as the endpoint.
 
 Congratulations! You have successfully deployed Agent OS on Railway. Your OS is now live and ready to use. You can now start using your Agents, Teams and Workflows as well as take a look at your Sessions, Memories, Knowledge and Metrics.
 
