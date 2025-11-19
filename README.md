@@ -119,7 +119,7 @@ Congratulations! You have successfully deployed Agent OS on Railway. Your OS is 
 To update your Railway deployment, you can run the following command after making changes to the application:
 
 ```sh
-./scripts/railway_up.sh
+railway up --service agent_os -d
 ```
 
 This will trigger a new deployment of your application by creating a new docker image and deploying it to Railway.
