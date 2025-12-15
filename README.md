@@ -24,7 +24,7 @@ cd agent-infra-railway
 
 ### Configure API keys
 
-We use GPT 5 as the default model, please export the `OPENAI_API_KEY` environment variable to get started.
+We use GPT 5 Mini as the default model, please export the `OPENAI_API_KEY` environment variable to get started.
 
 ```sh
 export OPENAI_API_KEY="YOUR_API_KEY_HERE"
@@ -60,6 +60,14 @@ Once started, you can:
 - Open the [Agno AgentOS UI](https://os.agno.com).
 - Connect your OS with `http://localhost:8000` as the endpoint. You can name it `AgentOS` (or any name you prefer).
 - Explore all the features of AgentOS or go straight to the Chat page to interact with your Agents, Teams and Workflows.
+
+### How to load the knowledge base locally
+
+To load the knowledge base, you can use the following command:
+
+```sh
+docker exec -it agent-infra-docker-agentos python -m agents.agno_assist
+```
 
 ### Stop the application
 
@@ -124,6 +132,22 @@ railway up --service agent_os -d
 
 This will trigger a new deployment of your application by creating a new docker image and deploying it to Railway.
 
+### Adding Knowledge on Railway
+
+To add knowledge to the Agno Knowledge Agent, run the following command:
+
+```sh
+railway ssh --service agent_os
+```
+
+This command will open a ssh session to the AgentOS service.
+
+Once you are in the ssh session, you can run the following command to add knowledge to the Agno Assist Agent:
+
+```sh
+python -m agents.agno_assist
+```
+
 ### Stopping your Railway Deployment
 
 To stop your Railway deployment, you can run the following command:
@@ -137,6 +161,10 @@ This will stop your services on Railway.
 
 Note: In order to start services again, in the same project on railway, you can run the `./scripts/railway_up.sh` script again but make sure to remove the railway init command as that will create a new project on Railway.
 
+### Railway Performance
+
+Based on your requirements, please make sure to update the CPU and Memory limits in the `railway.json` file. We recommend using 2000 CPU and 4Gi Memory for the AgentOS and PgVector database.
+
 ### What the railway_up.sh script does:
 
 The script does the following:
@@ -147,11 +175,22 @@ The script does the following:
 4. Deploys the application
 5. Creates a domain for your application
 
-## Prebuilt Agents, Teams and Workflows
+## Prebuilt Agents, Teams, and Workflows
 
-The `/agents` folder contains pre-built agents, teams and workflows that you can use as a starting point.
+The `/agents` folder contains pre-built agents, teams, and workflows that you can use as a starting point.
 
-#TODO: Add documentation for agents, teams and workflows
+- Agno Assist: An Agent that can help answer questions about Agno and provide support for developers working with Agno.
+- Web Search Agent: A Agent that can search the web based on the user's query.
+
+The `/teams` folder contains pre-built teams that you can use as a starting point.
+
+- Multilingual Team: A team consisting of member agents that specialize in different languages and can translate and provide cultural insights.
+- Reasoning Research Team: A team consisting of member agents that can research and provide insights.
+
+The `/workflows` folder contains pre-built workflows that you can use as a starting point.
+
+- Investment Workflow: A workflow that creates a comprehensive investment strategy report based on the user's request.
+- Research Workflow: A workflow that creates a comprehensive research report based on the user's request and provides a summary of the research findings.
 
 ### Create Virtual Environment & Install Dependencies
 

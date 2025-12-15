@@ -2,23 +2,23 @@ name: Validate
 
 on:
   push:
-    branches:
-      - "main"
   pull_request:
     types:
       - opened
-      - synchronize
+      - edited
       - reopened
     branches:
       - "main"
+
+env:
+  UV_SYSTEM_PYTHON: 1
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.11", "3.12"]
-      fail-fast: false
+        python-version: ["3.11"]
 
     steps:
       - uses: actions/checkout@v4
@@ -27,26 +27,24 @@ jobs:
         uses: astral-sh/setup-uv@v3
         with:
           enable-cache: true
-          cache-dependency-glob: "requirements**.txt"
+          cache-dependency-glob: "pyproject.toml"
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Create a virtual environment
-        run: uv venv --python ${{ matrix.python-version }}
-
-      - name: Install dependencies
-        run: |
-          uv pip sync requirements.txt
-          uv pip install ruff mypy
+      - name: Install the project with dev dependencies
+        run: uv sync --extra dev
 
       - name: Format with ruff
-        run: uv run ruff format . --check
+        run: uv run ruff format .
 
       - name: Lint with ruff
         run: uv run ruff check .
 
       - name: Type-check with mypy
         run: uv run mypy .
+
+      # - name: Run tests
+      #   run: uv run pytest tests
